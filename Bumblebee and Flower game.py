@@ -9,6 +9,8 @@ score = 0
 b = Actor("bee")
 f = Actor("flower")
 
+game_over = False
+
 b.x = 80
 b.y = 35
 
@@ -19,6 +21,12 @@ def draw():
     b.draw()
     f.draw()
     screen.draw.text("Score =" + str(score),(370,0))
+    if game_over == True:
+        screen.fill("Blue")
+        screen.draw.text("Times up! Your score is" + str(score),(250,200))
+def timer():
+    global game_over
+    game_over = True
 def update():
     global score
     if keyboard.left:
@@ -33,4 +41,5 @@ def update():
         f.x = random.randint(0,400)
         f.y = random.randint(0,400)
         score = score + 10
+clock.schedule(timer,10.0)
 pgzrun.go()
